@@ -1,2 +1,3 @@
 # dates-tool
-mini tool for get dates as iso8601
+
+Try the tool [here](https://erlajoua.github.io/dates-tool/)
