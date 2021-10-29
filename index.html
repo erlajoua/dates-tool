@@ -75,8 +75,8 @@
     </div>
     <div id="second">
         <span id="info"></span>
-        <span id="normal" onclick="copy_password(8)"></span>
-        <span id="iso" onclick="copy_password(4)"></span>
+        <span id="normal" onclick="copy_field(8)"></span>
+        <span id="iso" onclick="copy_field(4)"></span>
     </div>
     <script>
 
@@ -102,12 +102,13 @@
 
         })
 
-        function copy_password(len) {
+        function copy_field(len) {
+            let copyText;
             if (len == 8)
-                var copyText = document.getElementById("normal");
+                copyText = document.getElementById("normal");
             else
-                var copyText = document.getElementById("iso");
-            var textArea = document.createElement("textarea");
+                copyText = document.getElementById("iso");
+            let textArea = document.createElement("textarea");
             textArea.value = copyText.textContent.substring(len);
             document.body.appendChild(textArea);
             textArea.select();
