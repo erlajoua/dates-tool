@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dates-Tool</title>
+    <style>
+        body {
+            font-size: 28px;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        input[type="text"] {
+            width: 50px;
+            text-align: center;
+        }
+        input {
+            padding: 20px;
+            font-size:28px;
+        }
+        select {
+            padding: 20px;
+            font-size:28px;
+        }
+        #second {
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding:1%;
+        }
+        #year {
+            width: 100px;
+        }
+        #normal, #iso {
+            cursor:pointer;
+        }
+        #normal:hover, #iso:hover {
+            color:blue;
+        }
+        #normal:active, #iso:active {
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="" id="form">
+            <input type="text" id="number" value="1" placeholder="1">
+            <select name="month" id="months">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November	">November</option>
+                <option value="December">December</option>
+            </select>
+            <input type="text" id="year" value="2021" placeholder="2021">
+            <input type="text" id="hour" value="17" placeholder="17">
+            <span>h</span>
+            <input type="text" id="min" value="30" placeholder="30">
+            <span>min</span>
+            <input type="submit" name="" id="submitbutton" value="OK" style="cursor: pointer;">
+        </form>
+    </div>
+    <div id="second">
+        <span id="info"></span>
+        <span id="normal" onclick="copy_password(8)"></span>
+        <span id="iso" onclick="copy_password(4)"></span>
+    </div>
+    <script>
+
+        let formulaire = document.getElementById("submitbutton");
+        formulaire.addEventListener("click", e => {
+            e.preventDefault();
+            let number = document.getElementById("number").value;
+            let month = document.getElementById("months").value;
+            let year = document.getElementById("year").value;
+            let hour = document.getElementById("hour").value;
+            let min = document.getElementById("min").value;
+
+            let utchour = parseInt(hour) + 1;
+
+            console.log("yo", number,month, year,hour,min);
+            let date = new Date(month + ' ' + number + ', ' + year + ' ' + hour + ':' + min +':00');
+            let utcdate = new Date(month + ' ' + number + ', ' + year + ' ' + utchour + ':' + min +':00');
+            console.log(date.toISOString);
+
+            document.getElementById("info").innerHTML = `<span style="color:red;">Click to copy !</span>`;
+            document.getElementById("normal").innerHTML = `<strong>Normal: </strong>` + date.toString().substring(0, 24); 
+            document.getElementById("iso").innerHTML = `<strong>ISO: </strong>` + utcdate.toISOString(); 
+
+        })
+
+        function copy_password(len) {
+            if (len == 8)
+                var copyText = document.getElementById("normal");
+            else
+                var copyText = document.getElementById("iso");
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent.substring(len);
+            document.body.appendChild(textArea);
+            textArea.select();
+            console.log(textArea.value);
+            document.execCommand("Copy");
+            textArea.remove();
+        }
+
+    </script>
+</body>
+</html>
